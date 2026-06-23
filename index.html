@@ -112,14 +112,14 @@
     main {
       width: min(1180px, calc(100% - 36px));
       margin: 0 auto;
-      padding: 28px 0 44px;
+      padding: 18px 0 34px;
     }
 
     .hero {
       display: grid;
-      grid-template-columns: minmax(0, 1.08fr) minmax(340px, .92fr);
-      gap: 30px;
-      align-items: end;
+      grid-template-columns: 1fr;
+      gap: 26px;
+      align-items: start;
     }
 
     .image-stage {
@@ -128,7 +128,9 @@
       background: var(--mist);
       box-shadow: var(--shadow);
       aspect-ratio: 16 / 9;
-      max-height: 540px;
+      width: 100%;
+      max-height: min(520px, calc(100svh - 220px));
+      min-height: 330px;
     }
 
     .image-stage img {
@@ -180,7 +182,7 @@
     }
 
     .eyebrow {
-      margin: 0 0 18px;
+      margin: 0 0 16px;
       color: var(--gold);
       font-size: 13px;
       font-weight: 850;
@@ -190,27 +192,29 @@
 
     h1 {
       margin: 0;
-      font-size: clamp(42px, 6vw, 82px);
-      line-height: .92;
+      max-width: 11.5em;
+      font-size: clamp(38px, 5.2vw, 70px);
+      line-height: 1;
       font-weight: 850;
     }
 
     .hero-line {
-      margin: 22px 0 0;
+      max-width: 34em;
+      margin: 18px 0 0;
       color: var(--muted);
-      font-size: 18px;
-      line-height: 1.55;
+      font-size: 16px;
+      line-height: 1.58;
     }
 
     .hero-actions {
-      margin-top: 26px;
+      margin-top: 22px;
       display: flex;
       flex-wrap: wrap;
       gap: 12px;
     }
 
     .button {
-      min-height: 46px;
+      min-height: 42px;
       display: inline-flex;
       align-items: center;
       justify-content: center;
@@ -228,16 +232,17 @@
     }
 
     .metrics {
-      margin-top: 28px;
+      margin-top: 24px;
       display: grid;
       grid-template-columns: repeat(3, minmax(0, 1fr));
       border-top: 1px solid var(--line);
       border-bottom: 1px solid var(--line);
+      max-width: 680px;
     }
 
     .metric {
-      min-height: 86px;
-      padding: 16px;
+      min-height: 76px;
+      padding: 14px;
       border-right: 1px solid var(--line);
     }
 
@@ -247,7 +252,7 @@
 
     .metric strong {
       display: block;
-      font-size: 24px;
+      font-size: 21px;
       color: var(--green);
     }
 
@@ -260,18 +265,18 @@
     }
 
     .section {
-      margin-top: 34px;
-      padding-top: 34px;
+      margin-top: 22px;
+      padding-top: 22px;
       border-top: 1px solid rgba(20, 23, 19, .12);
       display: grid;
-      grid-template-columns: 260px minmax(0, 1fr);
-      gap: 36px;
+      grid-template-columns: 190px minmax(0, 1fr);
+      gap: 24px;
       align-items: start;
     }
 
     .section-title h2 {
       margin: 0;
-      font-size: 27px;
+      font-size: 22px;
       line-height: 1.12;
     }
 
@@ -291,8 +296,8 @@
     }
 
     .step {
-      min-height: 206px;
-      padding: 22px;
+      min-height: 148px;
+      padding: 18px;
       background: var(--white);
       border: 1px solid var(--line);
     }
@@ -300,21 +305,21 @@
     .step-number {
       display: block;
       color: var(--gold);
-      font-size: 13px;
+      font-size: 12px;
       font-weight: 850;
-      margin-bottom: 30px;
+      margin-bottom: 18px;
     }
 
     .step strong {
       display: block;
-      font-size: 21px;
+      font-size: 18px;
       line-height: 1.2;
     }
 
     .step p {
-      margin: 14px 0 0;
+      margin: 10px 0 0;
       color: var(--muted);
-      font-size: 14px;
+      font-size: 13px;
       line-height: 1.52;
     }
 
@@ -325,8 +330,8 @@
     }
 
     .asset-card {
-      min-height: 172px;
-      padding: 22px;
+      min-height: 132px;
+      padding: 18px;
       background: var(--green);
       color: var(--white);
       display: grid;
@@ -341,15 +346,15 @@
 
     .asset-card strong {
       display: block;
-      font-size: 21px;
+      font-size: 18px;
       line-height: 1.2;
     }
 
     .asset-card span {
       display: block;
-      margin-top: 12px;
+      margin-top: 8px;
       color: rgba(255, 255, 255, .72);
-      font-size: 14px;
+      font-size: 13px;
       line-height: 1.5;
     }
 
@@ -358,7 +363,7 @@
     }
 
     .asset-card a {
-      margin-top: 22px;
+      margin-top: 16px;
       color: inherit;
       font-size: 13px;
       font-weight: 850;
@@ -376,8 +381,8 @@
       grid-template-columns: 86px 1fr 76px;
       gap: 16px;
       align-items: center;
-      min-height: 82px;
-      padding: 15px 0;
+      min-height: 66px;
+      padding: 10px 0;
       border-bottom: 1px solid var(--line);
     }
 
@@ -389,14 +394,14 @@
 
     .event strong {
       display: block;
-      font-size: 17px;
+      font-size: 16px;
     }
 
     .event span {
       display: block;
-      margin-top: 6px;
+      margin-top: 4px;
       color: var(--muted);
-      font-size: 14px;
+      font-size: 13px;
       line-height: 1.42;
     }
 
@@ -420,8 +425,8 @@
     }
 
     .bond-card {
-      min-height: 172px;
-      padding: 18px;
+      min-height: 144px;
+      padding: 16px;
       background: var(--white);
       border: 1px solid var(--line);
       display: grid;
@@ -429,8 +434,8 @@
     }
 
     .plant-buddy {
-      width: 96px;
-      height: 96px;
+      width: 76px;
+      height: 76px;
       position: relative;
       display: grid;
       place-items: end center;
@@ -438,8 +443,8 @@
     }
 
     .plant-pot {
-      width: 50px;
-      height: 30px;
+      width: 42px;
+      height: 24px;
       position: relative;
       z-index: 3;
       background: linear-gradient(180deg, #d4a94b, #a97628);
@@ -449,10 +454,10 @@
 
     .plant-stem {
       width: 7px;
-      height: calc(26px + var(--growth, 0) * 6px);
+      height: calc(18px + var(--growth, 0) * 5px);
       position: absolute;
-      left: 45px;
-      bottom: 28px;
+      left: 35px;
+      bottom: 23px;
       z-index: 2;
       border-radius: 999px;
       background: linear-gradient(180deg, #4c9a55, #1f6a3e);
@@ -461,10 +466,10 @@
     }
 
     .plant-leaf {
-      width: calc(24px + var(--growth, 0) * 3px);
-      height: calc(15px + var(--growth, 0) * 2px);
+      width: calc(19px + var(--growth, 0) * 3px);
+      height: calc(12px + var(--growth, 0) * 2px);
       position: absolute;
-      bottom: calc(48px + var(--growth, 0) * 4px);
+      bottom: calc(39px + var(--growth, 0) * 4px);
       z-index: 2;
       border-radius: 100% 0 100% 0;
       background: linear-gradient(135deg, #89c86e, #216b3d);
@@ -473,12 +478,12 @@
     }
 
     .plant-leaf.left {
-      left: 18px;
+      left: 12px;
       transform: rotate(-26deg);
     }
 
     .plant-leaf.right {
-      right: 18px;
+      right: 12px;
       transform: rotate(116deg) scaleX(-1);
       animation-delay: .35s;
     }
@@ -487,8 +492,8 @@
       width: calc(15px + var(--growth, 0) * 2px);
       height: calc(19px + var(--growth, 0) * 2px);
       position: absolute;
-      left: 40px;
-      bottom: calc(62px + var(--growth, 0) * 6px);
+      left: 31px;
+      bottom: calc(48px + var(--growth, 0) * 5px);
       z-index: 2;
       border-radius: 100% 0 100% 0;
       background: linear-gradient(135deg, #b7df78, #2d7d48);
@@ -532,8 +537,8 @@
     }
 
     .buddy {
-      width: 52px;
-      height: 52px;
+      width: 44px;
+      height: 44px;
       border-radius: 50%;
       display: grid;
       place-items: center;
@@ -560,13 +565,13 @@
     .admin {
       background: #111711;
       color: var(--white);
-      padding: 34px;
+      padding: 24px;
       box-shadow: var(--shadow);
     }
 
     .admin h2 {
       margin: 0;
-      font-size: 28px;
+      font-size: 24px;
     }
 
     .admin-note {
@@ -577,7 +582,7 @@
     }
 
     .admin-grid {
-      margin-top: 24px;
+      margin-top: 18px;
       display: grid;
       grid-template-columns: repeat(3, minmax(0, 1fr));
       gap: 14px;
@@ -667,7 +672,7 @@
     }
 
     .gallery {
-      margin-top: 34px;
+      margin-top: 22px;
       display: grid;
       grid-template-columns: 1fr 1fr;
       gap: 14px;
@@ -675,7 +680,7 @@
 
     .gallery img {
       width: 100%;
-      height: 250px;
+      height: 190px;
       object-fit: cover;
       display: block;
       background: var(--mist);
@@ -684,7 +689,7 @@
     footer {
       width: min(1180px, calc(100% - 36px));
       margin: 0 auto;
-      padding: 28px 0 42px;
+      padding: 22px 0 34px;
       border-top: 1px solid rgba(20, 23, 19, .12);
       color: var(--muted);
       display: flex;
@@ -694,7 +699,6 @@
     }
 
     @media (max-width: 980px) {
-      .hero,
       .section {
         grid-template-columns: 1fr;
       }
@@ -719,12 +723,82 @@
         width: min(100% - 24px, 1180px);
       }
 
+      .nav {
+        height: 68px;
+      }
+
+      .brand {
+        gap: 10px;
+      }
+
+      .brand-mark {
+        width: 38px;
+        height: 38px;
+      }
+
+      .brand strong {
+        font-size: 15px;
+      }
+
+      .brand span {
+        font-size: 11px;
+      }
+
       .nav-links {
         display: flex;
       }
 
       .nav-links a {
         display: none;
+      }
+
+      main {
+        padding-top: 14px;
+      }
+
+      .hero {
+        gap: 22px;
+      }
+
+      .image-stage {
+        aspect-ratio: 4 / 3;
+        min-height: 0;
+        max-height: none;
+      }
+
+      .live-badge,
+      .client-badge {
+        min-height: 32px;
+        padding: 0 11px;
+        font-size: 12px;
+      }
+
+      .live-badge {
+        top: 12px;
+        left: 12px;
+      }
+
+      .client-badge {
+        right: 12px;
+        bottom: 12px;
+      }
+
+      .eyebrow {
+        margin-bottom: 12px;
+      }
+
+      h1 {
+        max-width: 9.8em;
+        font-size: clamp(36px, 12vw, 52px);
+      }
+
+      .hero-line {
+        margin-top: 14px;
+        font-size: 15px;
+      }
+
+      .button {
+        width: 100%;
       }
 
       .metrics,
