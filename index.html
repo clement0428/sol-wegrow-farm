@@ -55,24 +55,46 @@
       min-width: 0;
     }
 
-    .brand-mark {
-      width: 42px;
-      height: 42px;
-      border: 1px solid rgba(20, 23, 19, .16);
-      display: grid;
-      place-items: center;
-      color: var(--green);
-      font-weight: 850;
+    .brand-combo {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      min-width: 0;
+    }
+
+    .brand-logo {
+      display: block;
+      width: auto;
+      object-fit: contain;
       flex: 0 0 auto;
     }
 
-    .brand strong {
+    .brand-logo.sol {
+      height: 36px;
+    }
+
+    .brand-logo.wegrow {
+      height: 40px;
+    }
+
+    .brand-divider {
+      width: 1px;
+      height: 34px;
+      background: rgba(20, 23, 19, .14);
+      flex: 0 0 auto;
+    }
+
+    .brand-copy {
+      min-width: 0;
+    }
+
+    .brand-copy strong {
       display: block;
-      font-size: 17px;
+      font-size: 14px;
       line-height: 1.1;
     }
 
-    .brand span {
+    .brand-copy span {
       display: block;
       margin-top: 4px;
       color: var(--muted);
@@ -563,10 +585,35 @@
     }
 
     .admin {
+      display: none;
       background: #111711;
       color: var(--white);
       padding: 24px;
       box-shadow: var(--shadow);
+    }
+
+    .admin:target {
+      display: block;
+    }
+
+    .admin-head {
+      display: flex;
+      align-items: start;
+      justify-content: space-between;
+      gap: 16px;
+    }
+
+    .admin-close {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      min-height: 34px;
+      padding: 0 11px;
+      border: 1px solid rgba(255, 255, 255, .22);
+      color: rgba(255, 255, 255, .82);
+      font-size: 12px;
+      font-weight: 850;
+      white-space: nowrap;
     }
 
     .admin h2 {
@@ -731,17 +778,32 @@
         gap: 10px;
       }
 
-      .brand-mark {
-        width: 38px;
-        height: 38px;
+      .brand-combo {
+        gap: 8px;
       }
 
-      .brand strong {
-        font-size: 15px;
+      .brand-logo.sol {
+        height: 30px;
       }
 
-      .brand span {
+      .brand-logo.wegrow {
+        height: 32px;
+      }
+
+      .brand-divider {
+        height: 28px;
+      }
+
+      .brand-copy strong {
+        font-size: 12px;
+      }
+
+      .brand-copy span {
         font-size: 11px;
+      }
+
+      .brand-copy {
+        display: none;
       }
 
       .nav-links {
@@ -834,8 +896,12 @@
     <header>
       <nav class="nav" aria-label="主導覽">
         <a class="brand" href="#top" aria-label="SOL-WeGrow Farm 首頁">
-          <span class="brand-mark">SW</span>
-          <span>
+          <span class="brand-combo" aria-hidden="true">
+            <img class="brand-logo sol" src="assets/brand/sol-logo.png" alt="">
+            <span class="brand-divider"></span>
+            <img class="brand-logo wegrow" src="assets/brand/wegrow-logo.png" alt="">
+          </span>
+          <span class="brand-copy">
             <strong>SOL-WeGrow Farm</strong>
             <span data-i18n="brandSub">由 WeGrow Orbit 驅動</span>
           </span>
@@ -1006,8 +1072,13 @@
       </section>
 
       <section class="admin" id="admin" aria-label="企業資料後台">
-        <h2 data-i18n="adminTitle">企業資料後台</h2>
-        <p class="admin-note" data-i18n="adminNote">Demo 版資料會存在這台電腦的瀏覽器 localStorage，可即時更新前台顯示。</p>
+        <div class="admin-head">
+          <div>
+            <h2 data-i18n="adminTitle">企業資料後台</h2>
+            <p class="admin-note" data-i18n="adminNote">Demo 版資料會存在這台電腦的瀏覽器 localStorage，可即時更新前台顯示。</p>
+          </div>
+          <a class="admin-close" href="#top" data-i18n="adminClose">關閉</a>
+        </div>
 
         <form id="companyForm">
           <div class="admin-grid">
@@ -1152,6 +1223,7 @@
         harvestText: "把採果日變成企業員工期待的共同事件。",
         adminTitle: "企業資料後台",
         adminNote: "Demo 版資料會存在這台電腦的瀏覽器 localStorage，可即時更新前台顯示。",
+        adminClose: "關閉",
         fieldCompany: "企業名稱",
         fieldContact: "聯絡人",
         fieldCount: "認養株數",
@@ -1224,6 +1296,7 @@
         harvestText: "Make harvest day a shared company moment employees look forward to.",
         adminTitle: "Company Admin",
         adminNote: "Demo data is stored in this browser’s localStorage and updates the page instantly.",
+        adminClose: "Close",
         fieldCompany: "Company name",
         fieldContact: "Contact person",
         fieldCount: "Adopted plants",
