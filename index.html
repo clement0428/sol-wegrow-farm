@@ -119,6 +119,16 @@
       border-bottom-color: currentColor;
     }
 
+    .nav-links a.is-active {
+      color: var(--ink);
+      font-weight: 700;
+      border-bottom-color: var(--gold);
+    }
+
+    main .section, main .admin, main.hero-hidden .hero { display: none; }
+    main .section.is-active, main .admin.is-active, main .hero.is-active { display: block; }
+    main .hero.is-active { display: grid; }
+
     .lang-toggle {
       min-height: 34px;
       padding: 0 11px;
@@ -1035,7 +1045,7 @@
         </div>
       </section>
 
-      <section class="section" aria-label="農場陪伴計畫">
+      <section class="section" id="companion" aria-label="農場陪伴計畫">
         <div class="section-title">
           <h2 data-i18n="companionTitle">農場陪伴計畫</h2>
         </div>
@@ -1622,6 +1632,40 @@
     langToggle.addEventListener("click", () => {
       applyLanguage(currentLang === "zh" ? "en" : "zh");
     });
+
+    // ---- 分頁切換：每個 nav 項目是獨立畫面，不是同頁往下捲 ----
+    const TAB_IDS = ["top", "care", "asset", "esgcalc", "experience", "admin"];
+    const heroEl = document.querySelector(".hero");
+    function showTab(id) {
+      if (!TAB_IDS.includes(id)) id = "top";
+      heroEl.classList.toggle("is-active", id === "top");
+      document.querySelectorAll("main .section, main .admin").forEach((el) => {
+        const match = id === "experience"
+          ? (el.id === "experience" || el.id === "companion")
+          : el.id === id;
+        el.classList.toggle("is-active", match);
+      });
+      document.querySelectorAll(".nav-links a[href^='#']").forEach((a) => {
+        a.classList.toggle("is-active", a.getAttribute("href") === "#" + id);
+      });
+      window.scrollTo({ top: 0, behavior: "instant" in window ? "instant" : "auto" });
+    }
+    function navigateToTab(id) {
+      showTab(id);
+      history.pushState(null, "", "#" + id);
+    }
+    document.querySelectorAll("a[href^='#']").forEach((a) => {
+      const target = a.getAttribute("href").slice(1);
+      if (!TAB_IDS.includes(target)) return;
+      a.addEventListener("click", (event) => {
+        event.preventDefault();
+        navigateToTab(target);
+      });
+    });
+    window.addEventListener("popstate", () => {
+      showTab((location.hash || "#top").slice(1));
+    });
+    showTab((location.hash || "#top").slice(1));
   </script>
 </body>
 </html>
