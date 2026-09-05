@@ -125,9 +125,9 @@
       border-bottom-color: var(--gold);
     }
 
-    main .section, main .admin, main.hero-hidden .hero { display: none; }
-    main .section.is-active, main .admin.is-active, main .hero.is-active { display: block; }
-    main .hero.is-active { display: grid; }
+    main > .hero, main .section, main .admin { display: none; }
+    main .section.is-active, main .admin.is-active { display: block; }
+    main > .hero.is-active { display: grid; }
 
     .lang-toggle {
       min-height: 34px;
