@@ -1076,49 +1076,183 @@
         <div class="section-title">
           <h2>ESG 試算</h2>
         </div>
-        <p style="color:var(--muted);font-size:14px;line-height:1.7;margin:-8px 0 20px">依國際農業永續揭露標準（GRI 13、SAI Platform FSA、Cool Farm Tool）試算貴公司認養方案的具體永續數字。只列真實數字對應真實標準，沒有可查證換算依據的項目不會硬套金額。</p>
 
-        <div style="background:var(--white);border:1px solid var(--line);border-radius:12px;padding:20px 22px;margin-bottom:16px">
-          <div style="font-size:12px;color:var(--muted);margin-bottom:6px">威果溫室（臺南市麻豆區南寮段207地號）· 統編 83481068</div>
-          <div style="display:flex;align-items:baseline;gap:10px;margin-bottom:4px">
-            <span style="font-size:13px;color:var(--muted)">溫室氣體排放（電力）</span>
-            <span style="font-size:22px;font-weight:700;color:var(--ink)">NT$ 330／月</span>
+        <div class="esgcalc-frame">
+          <style>
+            #esgcalc .esgcalc-frame{
+              --ink:#14181f; --muted:#5b6270; --line:#e4e2da; --paper:#f7f6f1; --white:#fff;
+              --gold:#b68a35; --navy:#1c2b3d; --e:#3f6b52;
+              --shadow:0 20px 60px rgba(20,25,35,.10);
+              position:relative; background:var(--paper); border:1px solid var(--line); border-radius:16px;
+              padding:clamp(20px,4vw,40px); font-family:"Noto Serif TC","Georgia",serif; color:var(--ink);
+              box-shadow:var(--shadow); overflow:hidden;
+            }
+            #esgcalc .ec-sans{font-family:"Noto Sans TC","Helvetica Neue",Arial,sans-serif}
+            #esgcalc .ec-report{background:var(--white);border-radius:10px;padding:clamp(20px,3vw,36px)}
+            #esgcalc .ec-brandline{display:flex;justify-content:space-between;align-items:baseline;font-family:"Noto Sans TC",sans-serif;font-size:11px;color:var(--muted);letter-spacing:.06em;text-transform:uppercase;margin-bottom:22px;padding-bottom:12px;border-bottom:2px solid var(--ink)}
+            #esgcalc .ec-doctitle{font-size:22px;font-weight:600;line-height:1.35;margin:0 0 6px}
+            #esgcalc .ec-docsub{font-family:"Noto Sans TC",sans-serif;color:var(--muted);font-size:12.5px;margin-bottom:24px}
+            #esgcalc .ec-unitbar{font-family:"Noto Sans TC",sans-serif;display:flex;align-items:flex-end;gap:14px;flex-wrap:wrap;background:var(--paper);border:1px solid var(--line);border-radius:10px;padding:14px 16px;margin-bottom:22px}
+            #esgcalc .ec-unitbar .f{display:flex;flex-direction:column;gap:4px}
+            #esgcalc .ec-unitbar label{font-size:10.5px;color:var(--muted)}
+            #esgcalc .ec-unitbar input{width:90px;padding:7px 9px;border-radius:6px;border:1px solid var(--line);background:var(--white);color:var(--ink);font-size:13px}
+            #esgcalc .ec-basisline{font-size:10.5px;color:var(--muted);margin-left:auto}
+            #esgcalc .ec-needinput{color:var(--gold);font-weight:700}
+            #esgcalc .ec-kpirow{display:grid;grid-template-columns:repeat(3,1fr);gap:1px;background:var(--line);border:1px solid var(--line);margin-bottom:26px}
+            #esgcalc .ec-kpi{background:var(--white);padding:16px 14px}
+            #esgcalc .ec-kpi .l{font-family:"Noto Sans TC",sans-serif;font-size:10px;color:var(--muted);text-transform:uppercase;letter-spacing:.05em}
+            #esgcalc .ec-kpi .v{font-size:19px;font-weight:600;margin-top:5px}
+            #esgcalc .ec-block h2{font-family:"Noto Sans TC",sans-serif;font-size:12.5px;font-weight:700;text-transform:uppercase;letter-spacing:.05em;color:var(--muted);border-bottom:1px solid var(--line);padding-bottom:7px;margin:0 0 12px}
+            #esgcalc details.ec-figure{font-family:"Noto Sans TC",sans-serif;border-bottom:1px solid var(--line);padding:12px 0}
+            #esgcalc details.ec-figure:last-child{border-bottom:none}
+            #esgcalc details.ec-figure summary{display:flex;justify-content:space-between;align-items:baseline;cursor:pointer;list-style:none;font-size:13.5px;gap:10px}
+            #esgcalc details.ec-figure summary::-webkit-details-marker{display:none}
+            #esgcalc details.ec-figure summary .amt{font-weight:700;font-size:14px;white-space:nowrap}
+            #esgcalc details.ec-figure summary::after{content:"展開計算依據";font-size:10.5px;color:var(--gold);border-bottom:1px dotted var(--gold);white-space:nowrap}
+            #esgcalc details.ec-figure[open] summary::after{content:"收合"}
+            #esgcalc .ec-basis{margin-top:10px;font-size:11.5px;color:var(--muted);line-height:1.9;background:var(--paper);padding:12px 14px;border-left:2px solid var(--gold)}
+            #esgcalc .ec-basis b{color:var(--ink)}
+            #esgcalc .ec-cite{font-family:"Noto Sans TC",sans-serif;font-size:10.5px;color:var(--muted);margin-top:18px;line-height:1.8;border-top:1px solid var(--line);padding-top:12px}
+            #esgcalc .ec-stamp{display:inline-block;font-family:"Noto Sans TC",sans-serif;font-size:9.5px;font-weight:700;padding:2px 8px;border:1px solid currentColor;border-radius:3px}
+            #esgcalc .ec-stamp.gap{color:var(--muted);background:var(--paper)}
+            #esgcalc .ec-aisource{font-family:"Noto Sans TC",sans-serif;font-size:10.5px;color:var(--muted);background:var(--paper);border-left:2px solid var(--navy);padding:10px 14px;margin-top:12px;line-height:1.8}
+            #esgcalc table.ec-evidence{width:100%;border-collapse:collapse;font-size:11.5px;font-family:"Noto Sans TC",sans-serif}
+            #esgcalc table.ec-evidence th{text-align:left;padding:7px 4px;color:var(--muted);font-size:10.5px;border-bottom:1px solid var(--ink)}
+            #esgcalc table.ec-evidence td{padding:7px 4px;border-bottom:1px solid var(--line)}
+            #esgcalc .ec-aifab{position:absolute;right:18px;bottom:18px;width:46px;height:46px;border:0;border-radius:50%;background:#1b5e20;color:#E2CF35;display:flex;align-items:center;justify-content:center;font-size:16px;font-weight:800;cursor:pointer;box-shadow:0 4px 16px rgba(0,0,0,.3);z-index:5}
+            #esgcalc .ec-aipanel{position:absolute;right:18px;bottom:74px;width:min(320px,80vw);max-height:400px;background:var(--white);border-radius:12px;box-shadow:0 8px 32px rgba(0,0,0,.25);display:none;flex-direction:column;overflow:hidden;font-family:"Noto Sans TC",sans-serif;z-index:6}
+            #esgcalc .ec-aipanel.open{display:flex}
+            #esgcalc .ec-aihead{background:linear-gradient(135deg,#1b5e20,#2e7d32);padding:10px 14px;color:#fff}
+            #esgcalc .ec-aihead b{color:#E2CF35;font-size:13px}
+            #esgcalc .ec-aihead div{font-size:10.5px;opacity:.8;margin-top:2px}
+            #esgcalc .ec-aimsgs{flex:1;overflow-y:auto;padding:10px;display:flex;flex-direction:column;gap:6px;min-height:120px}
+            #esgcalc .ec-aimsgs .ec-sugg{width:100%;text-align:left;background:#f1f8e9;color:#2e7d32;border:1px solid #c8e6c9;border-radius:8px;padding:6px 9px;font-size:11px;cursor:pointer;margin-bottom:4px}
+            #esgcalc .ec-bubble{max-width:88%;padding:7px 10px;border-radius:12px;font-size:11.5px;line-height:1.55;white-space:pre-wrap}
+            #esgcalc .ec-bubble.user{align-self:flex-end;background:#E2CF35;color:#333;border-bottom-right-radius:4px}
+            #esgcalc .ec-bubble.ai{align-self:flex-start;background:#f5f5f5;color:#333;border-bottom-left-radius:4px}
+            #esgcalc .ec-aiinput{display:flex;gap:6px;padding:8px 10px;border-top:1px solid var(--line)}
+            #esgcalc .ec-aiinput input{flex:1;padding:7px 9px;border-radius:8px;border:1px solid var(--line);font-size:11.5px}
+            #esgcalc .ec-aiinput button{padding:7px 11px;border-radius:8px;border:none;background:#E2CF35;color:#4a4310;font-weight:700;font-size:11px;cursor:pointer}
+          </style>
+
+          <div class="ec-report">
+            <div class="ec-brandline"><span>SOL-WeGrow Farm ｜ ESG Impact Assessment</span><span>2026 Q3 · Draft for Review</span></div>
+            <div class="ec-doctitle">四葉國際通路股份有限公司<br>威果農場認養方案 永續影響力評估</div>
+            <div class="ec-docsub">統一編號 83481068 ｜ 產業別：餐旅服務（對應 SASB Restaurants）｜ 依 GRI Standards 與 SASB 揭露框架編製</div>
+
+            <div class="ec-unitbar">
+              <div class="f"><label>認養單位數</label><input id="ecUnitsInput" type="number" min="1" value="5" onchange="ecRecompute()"></div>
+              <div class="f"><label>員工參與人次</label><input id="ecPplInput" type="number" min="0" value="1" onchange="ecRecompute()"></div>
+              <div class="ec-basisline">每單位＝100株草莓（<span class="ec-needinput">或25株蜜瓜／50顆美濃瓜，待確認</span>）</div>
+            </div>
+
+            <div class="ec-kpirow">
+              <div class="ec-kpi"><div class="l">已有真實數據</div><div class="v">6 / 8</div></div>
+              <div class="ec-kpi"><div class="l">對應揭露標準</div><div class="v">GRI 13</div></div>
+              <div class="ec-kpi"><div class="l">對應揭露標準</div><div class="v">SAI FSA · Cool Farm Tool</div></div>
+            </div>
+
+            <div class="ec-block">
+              <h2>影響力明細（只列真實數字對應真實標準，不換算成新臺幣金額除非有真實費率）</h2>
+              <details class="ec-figure" open>
+                <summary><span>化學農藥使用</span><span class="amt" id="ecEnvAmt">0 次／認養期間</span></summary>
+                <div class="ec-basis"><b>數字：</b>威果溫室認養期間化學農藥施用紀錄為 0 次，育苗期採天敵防治（捕植螨、草蛉、瓢蟲等）取代化學藥劑。<br><b>對應揭露指標：</b>GRI 13.6。<br><b>資料來源：</b>WeGrow Orbit 內部施肥／用藥記錄（原始紀錄不對外揭露）。</div>
+              </details>
+              <details class="ec-figure">
+                <summary><span>員工永續體驗參與</span><span class="amt" id="ecSocAmt">1 人次</span></summary>
+                <div class="ec-basis"><b>對應揭露指標：</b>GRI 413（在地社區）。<br><b>查證狀態：</b>參與人次可由 WeGrow 活動紀錄查證。</div>
+              </details>
+              <details class="ec-figure">
+                <summary><span>溫室氣體排放 — 電力　<small style="font-weight:400;color:var(--muted)">（農場整體，非本方案分攤值）</small></span><span class="amt">NT$ 330／月</span></summary>
+                <div class="ec-basis"><b>計算基礎：</b>台電115年7月繳費通知單揭露電力排碳量1,100公斤CO₂ × 環境部碳費標準費率 NT$300/公噸CO2e（2025年生效）= NT$330／月。5月帳單1,517公斤，同費率為NT$455／月。<br><b>對應標準：</b>GRI 305、Cool Farm Tool。<br><b style="color:var(--gold)">尚待確認：</b>整場排放如何分攤到單一認養單位。<br><b>資料來源：</b>台電繳費通知單（2026年5、7月）＋環境部碳費費率公告。<span class="ec-stamp">已驗證原始單據＋官方費率</span></div>
+              </details>
+              <details class="ec-figure">
+                <summary><span>水資源使用</span><span class="amt">約 NT$ 500／月</span></summary>
+                <div class="ec-basis"><b style="color:var(--gold)">估算，非實際帳單：</b>台灣自來水公司一般用戶費率，假設每月用水約50度。威果溫室同時使用地下水與自來水，尚無實際水表帳單，此數字信賴度低於電費／農藥／損耗率數字。<br><b>對應標準：</b>GRI 13.7、Cool Farm Tool 藍水足跡。</div>
+              </details>
+              <details class="ec-figure gap">
+                <summary><span>生物多樣性</span><span class="amt">部分資料</span></summary>
+                <div class="ec-basis"><b>已確認：</b>無緩衝綠帶，但採天敵防治。<b>缺口：</b><span class="ec-stamp gap">尚無生物多樣性量測方法</span>，設施型栽培需另定義衡量方式。<br><b>對應標準：</b>Cool Farm Tool、GRI 13.4。</div>
+              </details>
+              <details class="ec-figure">
+                <summary><span>介質健康</span><span class="amt">已有配方紀錄</span></summary>
+                <div class="ec-basis"><b>計算基礎：</b>種植計畫書記錄實際介質配方（椰纖65%+珍珠石25-30%+有機堆肥5-10%），並有EC異常主動調整紀錄。<br><b>對應標準：</b>GRI 13.5。<span class="ec-stamp">已驗證原始紀錄</span></div>
+              </details>
+              <details class="ec-figure">
+                <summary><span>食物損耗與剩食</span><span class="amt">11.4% 真實丟棄率</span></summary>
+                <div class="ec-basis"><b>計算基礎：</b>總採收319.7公斤中，76.1%轉果醬加工，11.3%鮮果銷售，僅11.4%真正丟棄。<br><b>對應標準：</b>Cool Farm Tool。<span class="ec-stamp">已驗證原始紀錄，非估算</span></div>
+              </details>
+              <details class="ec-figure">
+                <summary><span>在地經濟支持</span><span class="amt">已有薪資資料</span></summary>
+                <div class="ec-basis"><b>計算基礎：</b>威果溫室僱用3位在地員工，起薪NT$38,000／月，另含宿舍/餐費/生日/AI補助。<br><b style="color:var(--gold)">尚待確認：</b>台灣基本工資確切數字，暫不計算「高於基本工資百分比」。<br><b>對應標準：</b>GRI 13.22、SAI Platform FSA。</div>
+              </details>
+            </div>
+
+            <div class="ec-aisource">AI 資料存取：讀取 WeGrow Orbit 施肥／灌溉／用藥等內部作業記錄作為計算依據；原始紀錄不對外揭露，僅呈現彙總結果。</div>
+
+            <div class="ec-block" style="margin-top:22px">
+              <h2>佐證文件（可供貴公司永續報告書查證使用）</h2>
+              <table class="ec-evidence">
+                <tr><th>構面</th><th>文件</th><th>發文單位／日期</th></tr>
+                <tr><td>溫室氣體排放</td><td>台電電費繳費通知單</td><td>台灣電力公司，2026年5、7月</td></tr>
+                <tr><td>水資源</td><td>灌溉水質檢驗報告</td><td>農業部農業試驗所，2025/10/02</td></tr>
+                <tr><td>介質健康</td><td>種植計畫書</td><td>WeGrow內部文件，2025</td></tr>
+                <tr><td>食物損耗</td><td>逐日採收／出貨／丟棄紀錄</td><td>WeGrow內部文件，2025</td></tr>
+                <tr><td>化學農藥減量</td><td>病蟲害防治資材清單</td><td>WeGrow LV1蟲害教材</td></tr>
+              </table>
+            </div>
+
+            <div class="ec-cite">
+              <b>方法論依據：</b>GRI 13（農業/水產/漁業扇形標準）、SAI Platform Farm Sustainability Assessment（雀巢、聯合利華、可口可樂、達能等共同採用）、Cool Farm Tool（全球多數頂尖食品飲料跨國企業採用）、GLOBALG.A.P.（137國近20萬生產者採用）。一般企業ESG對照 S&amp;P 500：依 G&amp;A Institute 2025年度追蹤，99%已發布永續報告，346家採用GRI、452家採用SASB、395家採用TCFD。<br>
+              本評估為 WeGrow 內部估算草稿，尚未經第三方保證機構查證，不可直接作為正式揭露文件使用。
+            </div>
           </div>
-          <div style="font-size:11.5px;color:var(--muted);line-height:1.8">
-            台電115年7月繳費通知單揭露電力排碳量1,100公斤CO₂ × 環境部碳費標準費率 NT$300/公噸CO2e（2025年生效）。5月同址帳單1,517公斤，同費率為NT$455／月。<br>
-            對應 GRI 305（範疇2排放）。此為整場數據，尚待確認如何分攤到單一認養方案。
+
+          <button class="ec-aifab" onclick="ecToggleAi()">AI</button>
+          <div class="ec-aipanel" id="ecAiPanel">
+            <div class="ec-aihead"><b>WeGrow AI</b><div>問我這份評估怎麼算出來的</div></div>
+            <div class="ec-aimsgs" id="ecAiMsgs">
+              <button class="ec-sugg" onclick="ecAsk('為什麼環境價值是這個數字？')">為什麼環境價值是這個數字？</button>
+              <button class="ec-sugg" onclick="ecAsk('美濃瓜到底算25株還是50顆？')">美濃瓜到底算25株還是50顆？</button>
+              <button class="ec-sugg" onclick="ecAsk('這是WeGrow官方認證的標準嗎？')">這是WeGrow官方認證的標準嗎？</button>
+            </div>
+            <div class="ec-aiinput"><input id="ecAiInputBox" placeholder="輸入問題…" onkeydown="if(event.key==='Enter')ecSendAi()"><button onclick="ecSendAi()">送出</button></div>
           </div>
-        </div>
-
-        <div style="background:var(--white);border:1px solid var(--line);border-radius:12px;padding:20px 22px;margin-bottom:16px">
-          <div style="font-size:13px;color:var(--muted);margin-bottom:4px">化學農藥使用</div>
-          <div style="font-size:22px;font-weight:700;margin-bottom:4px">0 次／認養期間</div>
-          <div style="font-size:11.5px;color:var(--muted)">WeGrow Orbit 內部用藥記錄，育苗期採天敵防治（捕植螨、草蛉、瓢蟲等）取代化學藥劑。對應 GRI 13.6。</div>
-        </div>
-
-        <div style="background:var(--white);border:1px solid var(--line);border-radius:12px;padding:20px 22px;margin-bottom:16px">
-          <div style="font-size:13px;color:var(--muted);margin-bottom:4px">食物損耗與剩食</div>
-          <div style="font-size:22px;font-weight:700;margin-bottom:4px">11.4% 真實丟棄率</div>
-          <div style="font-size:11.5px;color:var(--muted)">真實採收/去化紀錄：76.1%轉果醬加工，11.3%鮮果銷售，僅11.4%為真正丟棄。對應 Cool Farm Tool 食物損耗指標。</div>
-        </div>
-
-        <div style="background:var(--white);border:1px solid var(--gold);border-radius:12px;padding:20px 22px;margin-bottom:16px">
-          <div style="display:flex;align-items:baseline;gap:8px;margin-bottom:4px">
-            <span style="font-size:13px;color:var(--muted)">水資源使用</span>
-            <span style="font-size:22px;font-weight:700;color:var(--ink)">約 NT$ 500／月</span>
-            <span style="font-size:10px;font-weight:700;color:var(--gold);border:1px solid var(--gold);border-radius:4px;padding:1px 6px">估算，非實際帳單</span>
-          </div>
-          <div style="font-size:11.5px;color:var(--muted);line-height:1.8">
-            台灣自來水公司一般用戶分段累進費率（無公開之農業用水專屬費率），假設每月用水約50度，以一般費率估算約NT$500。威果溫室實際同時使用地下水（自行抽取）與自來水混合灌溉，尚無實際水表帳單可查證真實用量，此數字<b>不能</b>當作與電費、農藥、損耗率同等級的已驗證數字使用。<br>
-            對應 GRI 13.7（水資源與放流水）、Cool Farm Tool 藍水足跡。取得實際水費帳單後將以真實數字取代。
-          </div>
-        </div>
-
-        <div style="background:var(--mist);border-radius:12px;padding:16px 20px;font-size:12px;color:var(--muted);line-height:1.8">
-          <b style="color:var(--ink)">尚待補齊：</b>生物多樣性量測方法、在地經濟支持之基本工資對照。<br>
-          <b style="color:var(--ink)">方法論：</b>GRI 13（農業扇形標準）、SAI Platform Farm Sustainability Assessment、Cool Farm Tool、GLOBALG.A.P.。本頁為 WeGrow 內部估算草稿，尚未經第三方保證機構查證。
         </div>
       </section>
+
+      <script>
+        function ecRecompute(){
+          const ppl = Math.max(0, Math.round(Number(document.getElementById('ecPplInput')?.value) || 0));
+          document.getElementById('ecSocAmt').textContent = ppl + ' 人次';
+        }
+        function ecToggleAi(){ document.getElementById('ecAiPanel').classList.toggle('open'); }
+        function ecPushMsg(role, text){
+          const el = document.createElement('div');
+          el.className = 'ec-bubble ' + role;
+          el.textContent = text;
+          document.getElementById('ecAiMsgs').appendChild(el);
+          el.scrollIntoView({block:'end'});
+        }
+        function ecAnswerFor(q){
+          if (/為什麼.*環境|環境.*為什麼|農藥/.test(q)) return '化學農藥使用顯示「0次／認養期間」，這是威果溫室的真實用藥記錄，對應 GRI 13.6，不硬套換算成新臺幣金額。';
+          if (/美濃瓜|25株|50顆/.test(q)) return '老實說這個我沒有確定答案，舊資料寫25株蜜瓜，這次您說的是50顆美濃瓜，兩者對不上，需要您親自確認，不會用猜的填上去。';
+          if (/官方|認證|WeGrow.*規範|規範.*WeGrow/.test(q)) return '不是。WeGrow 知識庫目前沒有收錄 ESG 計算的官方規範，這份評估用的是外部公開國際標準（GRI、SASB），清楚標示為WeGrow內部估算草稿，尚未經第三方保證。';
+          return '這題我目前答不出可查證的答案，需要您確認後我才能回覆，不會用猜的。';
+        }
+        function ecAsk(q){
+          ecPushMsg('user', q);
+          document.getElementById('ecAiPanel').classList.add('open');
+          ecPushMsg('ai', ecAnswerFor(q));
+        }
+        function ecSendAi(){
+          const box = document.getElementById('ecAiInputBox');
+          const q = box.value.trim();
+          if (!q) return;
+          box.value = '';
+          ecAsk(q);
+        }
+      </script>
 
       <section class="admin" id="admin" aria-label="企業資料後台">
         <div class="admin-head">
